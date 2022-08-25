@@ -1,0 +1,25 @@
+# See FreeBSD docs:
+#   https://www.freebsd.org/cgi/man.cgi?query=pcm&sektion=4&format=html
+
+- name: "Set all available sound drivers to load at boot: {{ load_all_drivers }}"
+  community.general.sysrc:
+    path: "{{ loader_conf_path }}"
+    name: "snd_driver_load"
+    value: "YES"
+    state: "{{ 'present' if load_all_drivers else 'absent' }}"
+  vars:
+    load_all_drivers: "{{ sound_card_type == 'auto' }}"
+  become: true
+  become_user: root
+
+- name: "Set Intel sound driver to load at boot: {{ load_intel_driver }}"
+  community.general.sysrc:
+    path: "{{ loader_conf_path }}"
+    name: "snd_hda_load"
+    value: "YES"
+    state: "{{ 'present' if load_intel_driver else 'absent' }}"
+  vars:
+    load_intel_driver: "{{ sound_card_type == 'intel' }}"
+  become: true
+  become_user: root
+

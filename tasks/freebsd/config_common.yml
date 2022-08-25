@@ -1,0 +1,25 @@
+# References:
+#   https://docs.freebsd.org/en/books/handbook/multimedia/#sound-setup
+#   https://wiki.freebsd.org/Sound
+#   https://www.freebsd.org/cgi/man.cgi?sound
+#   https://vermaden.wordpress.com/2021/05/26/freebsd-desktop-part-26-configuration-conferencing-and-meetings/
+#   https://www.davidschlachter.com/misc/freebsd-videoconferencing
+
+- name: "At boot, reset the system-default sound input-output device to 'pcm-{{ force_set_sound_output_pcm_at_boot }}'"
+  ansible.posix.sysctl:
+    sysctl_file: "{{ sysctl_conf_path }}"
+    name: hw.snd.default_unit
+    value: "{{ force_set_sound_output_pcm_at_boot }}"
+    state: "{{ 'absent' if (force_set_sound_output_pcm_at_boot == 'auto') else 'present' }}"
+  become: true
+  become_user: root
+
+- name: "Set max number of simultaneous sound channels in {{ sysctl_conf_path }}"
+  ansible.posix.sysctl:
+    sysctl_file: "{{ sysctl_conf_path }}"
+    name: hw.snd.maxautovchans
+    value: "{{ max_num_simulatneous_sound_channels }}"
+    state: present
+  become: true
+  become_user: root
+

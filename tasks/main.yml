@@ -1,0 +1,4 @@
+- name: "Configure OSS sound driver layer for FreeBSD"
+  ansible.builtin.include_tasks: freebsd/main.yml
+  when: ansible_os_family == "FreeBSD"
+

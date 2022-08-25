@@ -1,0 +1,10 @@
+- name: "Configure specific sound drivers to load at boot"
+  ansible.builtin.include_tasks: load_drivers.yml
+
+- name: "Configure sound settings common to all sound cards"
+  ansible.builtin.include_tasks: config_common.yml
+
+- name: "Configure sound settings for Intel sound cards"
+  ansible.builtin.include_tasks: config_intel.yml
+  when: sound_card_type == "intel"
+
