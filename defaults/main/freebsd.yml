@@ -1,0 +1,25 @@
+# sound card type: 'auto' (loads all available drivers) or 'intel'
+sound_card_type: 'auto'
+
+# list of Intel sound card NIDs (sound channels) to disable, for specific cards
+# Use 'sysctl -a | grep hda' to find list of NIDs and associated PCMs
+intel_nid_disable_list: []
+  # - { card: '0', nid: '30', descrip: 'optical channel of rear speaker/optical combo jack' }
+
+# How to force/reset the sound output device (PCM) at boot:
+#   '0/1/2/n': reset to specific device PCM number (from list in 'dmesg | grep pcm')
+#   'auto': reset to "best suitable" PCM (based on device capabilities)
+force_set_sound_output_pcm_at_boot: 'auto'
+
+# max number of simultaneous play and record audio channels
+max_num_simulatneous_sound_channels: '4'
+
+# path to loader.conf bootloader config file
+loader_conf_path: '/boot/loader.conf'
+
+# path to sysctl system-tuning config file
+sysctl_conf_path: '/etc/sysctl.conf'
+
+# path to bootloader device.hints file
+device_hints_path: '/boot/device.hints'
+
