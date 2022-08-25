@@ -1,0 +1,14 @@
+galaxy_info:
+  author: digimokan
+  description: "Install and configure the OSS sound driver layer"
+  license: "MIT"
+  min_ansible_version: 2.7
+  platforms:
+    - name: FreeBSD
+      versions:
+        - all
+  galaxy_tags:
+    - freebsd
+    - sound
+    - oss
+
