@@ -1,4 +1,4 @@
 # oss commands to increase and decrease volume by set increments
-oss_cmd_inc_volume: "mixer vol +5:+5"
-oss_cmd_dec_volume: "mixer vol -5:-5"
+oss_inc_volume_cmd: "mixer vol +5:+5"
+oss_dec_volume_cmd: "mixer vol -5:-5"
 
