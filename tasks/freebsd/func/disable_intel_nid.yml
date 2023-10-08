@@ -6,7 +6,7 @@
     block: "hint.hdaa.{{ channel.card }}.nid{{ channel.nid }}.config=\"as=0\""
     marker: "# {mark} ANSIBLE MANAGED BLOCK: {{ channel.descrip }}"
     state: present
-    create: no
+    create: false
   become: true
   become_user: root
 
