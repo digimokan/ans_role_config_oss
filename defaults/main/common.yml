@@ -2,3 +2,6 @@
 oss_inc_volume_cmd: "mixer vol +5:+5"
 oss_dec_volume_cmd: "mixer vol -5:-5"
 
+# oss sound server name (for sinking/sourcing to and from other apps)
+oss_sound_server_name: "oss"
+
