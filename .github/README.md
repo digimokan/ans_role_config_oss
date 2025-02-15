@@ -18,6 +18,7 @@ Install and configure the OSS sound driver layer.
 
 * Install and configure [OSS](https://en.wikipedia.org/wiki/Open_Sound_System).
 * OSS is the sound driver layer distributed with FreeBSD.
+* Provide an oss [utility script](../tasks/freebsd/utility_script.yml).
 
 ## Supported Operating Systems
 

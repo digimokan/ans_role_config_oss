@@ -1,7 +1,16 @@
+# oss "mixer" command
+oss_mixer_cmd: "mixer"
+
+# default percent increase/decrease for volume inc/dec commands
+oss_mixer_vol_adjust_pct: "5"
+
 # oss commands to increase and decrease volume by set increments
-oss_inc_volume_cmd: "mixer vol=+5%"
-oss_dec_volume_cmd: "mixer vol=-5%"
+oss_inc_volume_cmd: "{{ oss_mixer_cmd }} vol=+{{ oss_mixer_vol_adjust_pct }}%"
+oss_dec_volume_cmd: "{{ oss_mixer_cmd }} vol=-{{ oss_mixer_vol_adjust_pct }}%"
 
 # oss sound server name (for sinking/sourcing to and from other apps)
 oss_sound_server_name: "oss"
+
+# command to execute to run the oss utility script (provided by this role)
+oss_utility_script_cmd: 'do_oss.sh'
 

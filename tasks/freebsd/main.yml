@@ -8,3 +8,6 @@
   ansible.builtin.include_tasks: config_intel.yml
   when: oss_sound_card_type == "intel"
 
+- name: "Create OSS utility script"
+  ansible.builtin.include_tasks: utility_script.yml
+
