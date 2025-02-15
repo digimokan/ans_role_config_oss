@@ -11,6 +11,9 @@ oss_intel_nid_disable_list: []
 #   'auto': reset to "best suitable" PCM (based on device capabilities)
 oss_force_set_sound_output_pcm_at_boot: 'auto'
 
+# load the USB audio device driver at boot
+oss_load_usb_audio_driver_at_boot: false
+
 # max number of simultaneous play and record audio channels
 oss_max_num_simulatneous_sound_channels: '4'
 
