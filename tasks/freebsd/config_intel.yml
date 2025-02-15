@@ -4,7 +4,7 @@
 
 - name: "Disable an Intel NID channel from appearing in list of PCMs"
   ansible.builtin.include_tasks: func/disable_intel_nid.yml
-  loop: "{{ intel_nid_disable_list }}"
+  loop: "{{ oss_intel_nid_disable_list }}"
   loop_control:
     loop_var: channel
 

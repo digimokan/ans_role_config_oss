@@ -7,18 +7,18 @@
 
 - name: "At boot, reset the system-default sound input-output device to 'pcm-{{ force_set_sound_output_pcm_at_boot }}'"
   ansible.posix.sysctl:
-    sysctl_file: "{{ sysctl_conf_path }}"
+    sysctl_file: "{{ oss_sysctl_conf_path }}"
     name: hw.snd.default_unit
-    value: "{{ force_set_sound_output_pcm_at_boot }}"
-    state: "{{ 'absent' if (force_set_sound_output_pcm_at_boot == 'auto') else 'present' }}"
+    value: "{{ oss_force_set_sound_output_pcm_at_boot }}"
+    state: "{{ 'absent' if (oss_force_set_sound_output_pcm_at_boot == 'auto') else 'present' }}"
   become: true
   become_user: root
 
-- name: "Set max number of simultaneous sound channels in {{ sysctl_conf_path }}"
+- name: "Set max number of simultaneous sound channels in {{ oss_sysctl_conf_path }}"
   ansible.posix.sysctl:
-    sysctl_file: "{{ sysctl_conf_path }}"
+    sysctl_file: "{{ oss_sysctl_conf_path }}"
     name: hw.snd.maxautovchans
-    value: "{{ max_num_simulatneous_sound_channels }}"
+    value: "{{ oss_max_num_simulatneous_sound_channels }}"
     state: present
   become: true
   become_user: root

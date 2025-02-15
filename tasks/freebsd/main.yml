@@ -6,5 +6,5 @@
 
 - name: "Configure sound settings for Intel sound cards"
   ansible.builtin.include_tasks: config_intel.yml
-  when: sound_card_type == "intel"
+  when: oss_sound_card_type == "intel"
 

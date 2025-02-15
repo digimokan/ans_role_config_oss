@@ -57,9 +57,13 @@ Install and configure the OSS sound driver layer.
 
 ## Role Options
 
-See the role `defaults` file, for overridable vars:
+Vars with default values, which can be overridden in the playbook:
 
-  * [defaults/main/](../defaults/main/)
+  * [overridable](../defaults/main/overridable)
+
+Vars defined by this role, exported with `public: true`, for use in other roles:
+
+  * [export](../defaults/main/export/commands.yml)
 
 ## Contributing
 
