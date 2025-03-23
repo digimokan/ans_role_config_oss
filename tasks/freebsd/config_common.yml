@@ -14,7 +14,7 @@
   become: true
   become_user: root
 
-- name: "At boot, set the system-default sound input-output device to 'pcm-{{ force_set_sound_output_pcm_at_boot }}'"
+- name: "At boot, set the system-default sound input-output device to 'pcm-{{ oss_force_set_sound_output_pcm_at_boot }}'"
   ansible.posix.sysctl:
     sysctl_file: "{{ oss_sysctl_conf_path }}"
     name: hw.snd.default_unit
