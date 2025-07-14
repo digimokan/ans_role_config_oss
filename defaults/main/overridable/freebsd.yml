@@ -14,9 +14,6 @@ oss_force_set_sound_output_pcm_at_boot: 'auto'
 # load the USB audio device driver at boot
 oss_load_usb_audio_driver_at_boot: false
 
-# max number of simultaneous play and record audio channels
-oss_max_num_simulatneous_sound_channels: '4'
-
 # path to loader.conf bootloader config file
 oss_loader_conf_path: '/boot/loader.conf'
 

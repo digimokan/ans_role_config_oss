@@ -23,12 +23,3 @@
   become: true
   become_user: root
 
-- name: "Set max number of simultaneous sound channels in {{ oss_sysctl_conf_path }}"
-  ansible.posix.sysctl:
-    sysctl_file: "{{ oss_sysctl_conf_path }}"
-    name: hw.snd.maxautovchans
-    value: "{{ oss_max_num_simulatneous_sound_channels }}"
-    state: present
-  become: true
-  become_user: root
-
