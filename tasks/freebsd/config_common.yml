@@ -32,7 +32,7 @@
     force: true
   become: true
   become_user: root
-  when: oss_set_sound_io_device_on_attach | length > 0
+  when: oss_set_usb_sound_io_device_on_attach | length > 0
   notify:
     - oss_restart_devd
 
@@ -42,7 +42,7 @@
     state: absent
   become: true
   become_user: root
-  when: oss_set_sound_io_device_on_attach | length == 0
+  when: oss_set_usb_sound_io_device_on_attach | length == 0
   notify:
     - oss_restart_devd
 
