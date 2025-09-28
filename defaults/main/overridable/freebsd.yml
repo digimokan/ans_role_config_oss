@@ -4,12 +4,12 @@ oss_sound_card_type: 'auto'
 # list of Intel sound card NIDs (sound channels) to disable, for specific cards
 # Use 'sysctl -a | grep hda' to find list of NIDs and associated PCMs
 oss_intel_nid_disable_list: []
-  # - { card: '0', nid: '30', descrip: 'optical channel of rear speaker/optical combo jack' }
+#   - { card: '0', nid: '30', descrip: 'optical channel of rear speaker/optical combo jack' }
 
-# How to force/reset the sound output device (PCM) at boot:
+# How to force/reset the sound input and output device (PCM) at boot:
 #   '0/1/2/n': reset to specific device PCM number (from list in 'cat /dev/sndstat')
 #   'auto': reset to "best suitable" PCM (based on device capabilities)
-oss_force_set_sound_output_pcm_at_boot: 'auto'
+oss_force_set_sound_io_pcm_at_boot: 'auto'
 
 # load the USB audio device driver at boot
 oss_load_usb_audio_driver_at_boot: false
@@ -22,4 +22,19 @@ oss_sysctl_conf_path: '/etc/sysctl.conf'
 
 # path to bootloader device.hints file
 oss_device_hints_path: '/boot/device.hints'
+
+# path to devd USB attach/detach rules file
+oss_devd_usb_rules_path: '/usr/local/etc/devd/pcm.conf'
+
+# If defined, detect attach of this USB device and set it as default I/O device
+# Note: this setting may work better than oss_force_set_sound_io_pcm_at_boot
+#       for flaky USB audio devices.
+oss_set_sound_io_device_on_attach: {}
+# oss_set_sound_io_device_on_attach:
+#   # find with "usbconfig dump_info" and "usbconfig -d <ugen> dump_device_desc"
+#   vendor_id: "0xb0da"
+#   prod_id: "0x5c53"
+#   # find with "cat /dev/sndstat"
+#   mfr_name: "Speaker Tron"
+#   prod_name: "BFS 9000"
 

@@ -1,0 +1,11 @@
+# vim: set filetype=conf:
+# ANSIBLE-MANAGED RULES FILE
+# Purpose: detect attachment of preferred USB audio device, and on attach,
+#          set it as the default input and output device.
+
+attach 100 {
+  match "vendor" "{{ oss_set_sound_io_device_on_attach.vendor_id }}";
+  match "product" "{{ oss_set_sound_io_device_on_attach.prod_id }}";
+  action "sysctl hw.snd.default_unit=$(grep '<{{ oss_set_sound_io_device_on_attach.mfr_name }} {{ oss_set_sound_io_device_on_attach.prod_name }}>' /dev/sndstat | awk '{ print substr($1,4,1) }')";
+};
+

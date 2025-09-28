@@ -14,12 +14,35 @@
   become: true
   become_user: root
 
-- name: "At boot, set the system-default sound input-output device to 'pcm-{{ oss_force_set_sound_output_pcm_at_boot }}'"
+- name: "At boot, set the system-default sound input-output device to 'pcm-{{ oss_force_set_sound_io_pcm_at_boot }}'"
   ansible.posix.sysctl:
     sysctl_file: "{{ oss_sysctl_conf_path }}"
     name: hw.snd.default_unit
-    value: "{{ oss_force_set_sound_output_pcm_at_boot }}"
-    state: "{{ 'absent' if (oss_force_set_sound_output_pcm_at_boot == 'auto') else 'present' }}"
+    value: "{{ oss_force_set_sound_io_pcm_at_boot }}"
+    state: "{{ 'absent' if (oss_force_set_sound_io_pcm_at_boot == 'auto') else 'present' }}"
   become: true
   become_user: root
+
+- name: "Create devd set-USB-dev-to-default-on-attach rules in '{{ oss_devd_usb_rules_path }}'"
+  ansible.builtin.template:
+    dest: "{{ oss_devd_usb_rules_path }}"
+    src: "pcm_conf.j2"
+    owner: root
+    mode: '644'
+    force: true
+  become: true
+  become_user: root
+  when: oss_set_sound_io_device_on_attach | length > 0
+  notify:
+    - oss_restart_devd
+
+- name: "Remove any devd USB on-attach rules file at '{{ oss_devd_usb_rules_path }}'"
+  ansible.builtin.file:
+    path: "{{ oss_devd_usb_rules_path }}"
+    state: absent
+  become: true
+  become_user: root
+  when: oss_set_sound_io_device_on_attach | length == 0
+  notify:
+    - oss_restart_devd
 
