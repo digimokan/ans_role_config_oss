@@ -1,0 +1,16 @@
+# References:
+#   https://docs.freebsd.org/en/books/handbook/multimedia/#sound-setup
+#   https://wiki.freebsd.org/Sound
+#   https://www.freebsd.org/cgi/man.cgi?sound
+#   https://vermaden.wordpress.com/2021/05/26/freebsd-desktop-part-26-configuration-conferencing-and-meetings/
+#   https://www.davidschlachter.com/misc/freebsd-videoconferencing
+
+- name: "At boot, set the system-default sound input-output device to 'pcm-{{ oss_force_set_sound_io_pcm_at_boot }}'"
+  ansible.posix.sysctl:
+    sysctl_file: "{{ oss_sysctl_conf_path }}"
+    name: hw.snd.default_unit
+    value: "{{ oss_force_set_sound_io_pcm_at_boot }}"
+    state: "{{ 'absent' if (oss_force_set_sound_io_pcm_at_boot == 'auto') else 'present' }}"
+  become: true
+  become_user: root
+

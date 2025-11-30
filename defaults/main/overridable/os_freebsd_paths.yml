@@ -1,0 +1,12 @@
+# path to loader.conf bootloader config file
+oss_loader_conf_path: '/boot/loader.conf'
+
+# path to sysctl system-tuning config file
+oss_sysctl_conf_path: '/etc/sysctl.conf'
+
+# path to bootloader device.hints file
+oss_device_hints_path: '/boot/device.hints'
+
+# path to devd USB attach/detach rules file
+oss_devd_usb_rules_path: '/usr/local/etc/devd/pcm.conf'
+

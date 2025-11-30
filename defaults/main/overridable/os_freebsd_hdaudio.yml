@@ -1,0 +1,5 @@
+# list of HD-Audio sound card NIDs (sound channels) to disable, for specific cards
+# Use 'sysctl -a | grep hda' to find list of NIDs and associated PCMs
+oss_hdaudio_nid_disable_list: []
+#   - { card: '0', nid: '30', descrip: 'optical channel of rear speaker/optical combo jack' }
+

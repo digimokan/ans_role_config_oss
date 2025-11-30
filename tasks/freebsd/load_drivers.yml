@@ -1,25 +1,33 @@
-# See FreeBSD docs:
-#   https://www.freebsd.org/cgi/man.cgi?query=pcm&sektion=4&format=html
-
-- name: "Set all available sound drivers to load at boot: {{ load_all_drivers }}"
+- name: "Set which sound drivers to enable/load at boot"
   community.general.sysrc:
     path: "{{ oss_loader_conf_path }}"
-    name: "snd_driver_load"
+    name: "snd_{{ driver.nm }}_load"
     value: "YES"
-    state: "{{ 'present' if load_all_drivers else 'absent' }}"
-  vars:
-    load_all_drivers: "{{ oss_sound_card_type == 'auto' }}"
-  become: true
-  become_user: root
-
-- name: "Set Intel sound driver to load at boot: {{ load_intel_driver }}"
-  community.general.sysrc:
-    path: "{{ oss_loader_conf_path }}"
-    name: "snd_hda_load"
-    value: "YES"
-    state: "{{ 'present' if load_intel_driver else 'absent' }}"
-  vars:
-    load_intel_driver: "{{ oss_sound_card_type == 'intel' }}"
+    state: "{{ 'present' if driver.en else 'absent' }}"
+  loop:
+    - { nm: "atiixp", en: "{{ oss_load_driver_at_boot_ati_ixp }}", ct: "ATI IXP Bridge" }
+    - { nm: "als4000", en: "{{ oss_load_driver_at_boot_avance_logic_als4000 }}", ct: "Avance Logic ALS4000 PCI Bridge" }
+    - { nm: "cmi", en: "{{ oss_load_driver_at_boot_cmedia }}", ct: "CMedia CMI8338/CMI8738 PCI Bridge" }
+    - { nm: "cs4281", en: "{{ oss_load_driver_at_boot_cs4281 }}", ct: "Crystal Semiconductor CS4281 PCI Bridge" }
+    - { nm: "csa", en: "{{ oss_load_driver_at_boot_crystal_semi }}", ct: "Crystal Semiconductor CS461x/462x/4280 PCI Bridge" }
+    - { nm: "es137x", en: "{{ oss_load_driver_at_boot_ensoniq_es137x }}", ct: "Ensoniq AudioPCI ES137x PCI Bridge" }
+    - { nm: "maestro3", en: "{{ oss_load_driver_at_boot_ess_maestro3 }}", ct: "ESS Maestro3/Allegro-1 PCI Bridge" }
+    - { nm: "solo", en: "{{ oss_load_driver_at_boot_ess_solo }}", ct: "ESS Solo-1/1E PCI Bridge" }
+    - { nm: "fm801", en: "{{ oss_load_driver_at_boot_forte_media_fm801 }}", ct: "Forte Media FM801 Bridge" }
+    - { nm: "hda", en: "{{ oss_load_driver_at_boot_hdaudio }}", ct: "Intel High Definition Audio Bridge" }
+    - { nm: "ich", en: "{{ oss_load_driver_at_boot_intel_ich_ac97 }}", ct: "Intel ICH AC'97 And Compatible Bridge" }
+    - { nm: "spicds", en: "{{ oss_load_driver_at_boot_i2s_spi }}", ct: "I2S SPI Audio Codec" }
+    - { nm: "neomagic", en: "{{ oss_load_driver_at_boot_neomagic }}", ct: "NeoMagic 256AV/ZX Bridge" }
+    - { nm: "hdspe", en: "{{ oss_load_driver_at_boot_rme_hdspe }}", ct: "RME HDSPe Bridge" }
+    - { nm: "emu10k1", en: "{{ oss_load_driver_at_boot_sb_live_audigy_10k1 }}", ct: "SoundBlaster Live! And Audigy PCI Bridge" }
+    - { nm: "emu10kx", en: "{{ oss_load_driver_at_boot_sb_live_audigy_10kx }}", ct: "Creative SoundBlaster Live! And Audigy" }
+    - { nm: "vibes", en: "{{ oss_load_driver_at_boot_s3_sonic_vibes }}", ct: "S3 SonicVibes Bridge" }
+    - { nm: "uaudio", en: "{{ oss_load_driver_at_boot_usb }}", ct: "USB Audio And MIDI" }
+    - { nm: "envy24ht", en: "{{ oss_load_driver_at_boot_via_envy24_ht }}", ct: "VIA Envy24HT And Compatible Bridge" }
+    - { nm: "via8233", en: "{{ oss_load_driver_at_boot_via_8233 }}", ct: "VIA Technologies VT8233 Bridge" }
+    - { nm: "via82c686", en: "{{ oss_load_driver_at_boot_via_82c686 }}", ct: "VIA Technologies 82C686A Bridge" }
+  loop_control:
+    loop_var: driver
   become: true
   become_user: root
 

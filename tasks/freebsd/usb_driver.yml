@@ -5,24 +5,6 @@
 #   https://vermaden.wordpress.com/2021/05/26/freebsd-desktop-part-26-configuration-conferencing-and-meetings/
 #   https://www.davidschlachter.com/misc/freebsd-videoconferencing
 
-- name: "Enable USB audio driver to load at boot: {{ oss_load_usb_audio_driver_at_boot }}"
-  community.general.sysrc:
-    path: "{{ oss_loader_conf_path }}"
-    name: "snd_uaudio_load"
-    value: "YES"
-    state: "{{ 'present' if oss_load_usb_audio_driver_at_boot else 'absent' }}"
-  become: true
-  become_user: root
-
-- name: "At boot, set the system-default sound input-output device to 'pcm-{{ oss_force_set_sound_io_pcm_at_boot }}'"
-  ansible.posix.sysctl:
-    sysctl_file: "{{ oss_sysctl_conf_path }}"
-    name: hw.snd.default_unit
-    value: "{{ oss_force_set_sound_io_pcm_at_boot }}"
-    state: "{{ 'absent' if (oss_force_set_sound_io_pcm_at_boot == 'auto') else 'present' }}"
-  become: true
-  become_user: root
-
 - name: "Create devd set-USB-dev-to-default-on-attach rules in '{{ oss_devd_usb_rules_path }}'"
   ansible.builtin.template:
     dest: "{{ oss_devd_usb_rules_path }}"

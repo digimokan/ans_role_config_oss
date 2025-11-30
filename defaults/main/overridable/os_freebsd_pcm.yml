@@ -1,0 +1,5 @@
+# Force/reset the sound input and output device (aka PCM) at boot:
+#   '0/1/2/n': reset to specific device PCM number (from list in 'cat /dev/sndstat')
+#   'auto': reset to "best suitable" PCM (based on device capabilities)
+oss_force_set_sound_io_pcm_at_boot: 'auto'
+

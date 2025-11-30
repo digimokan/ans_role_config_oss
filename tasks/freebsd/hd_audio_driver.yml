@@ -1,0 +1,25 @@
+# See FreeBSD docs:
+#   https://www.freebsd.org/cgi/man.cgi?query=snd_hda
+#   https://www.freebsd.org/cgi/man.cgi?device.hints
+
+- name: "If user provided oss_hdaudio_nid_disable_list, check that oss_load_driver_at_boot_hdaudio is set"
+  ansible.builtin.fail:
+    msg: "oss_load_driver_at_boot_hdaudio must be set when oss_hdaudio_nid_disable_list is not empty."
+  when: (oss_hdaudio_nid_disable_list | length > 0) and
+        (not oss_load_driver_at_boot_hdaudio)
+
+- name: "Disable select HD-Audio NID channels from appearing in list of PCMs"
+  ansible.builtin.blockinfile:
+    path: "{{ oss_device_hints_path }}"
+    block: |
+      # NOTE: "as=0" (i.e. "association") sets the NID to 'disabled'
+      # See documentation in https://www.freebsd.org/cgi/man.cgi?query=snd_hda
+      {% for channel in oss_hdaudio_nid_disable_list %}
+      hint.hdaa.{{ channel.card }}.nid{{ channel.nid }}.config="as=0"
+      {% endfor %}
+    marker: "# {mark} ANSIBLE MANAGED BLOCK: oss_hdaudio_nid_disable_list"
+    state: "{{ 'present' if oss_hdaudio_nid_disable_list | length > 0 else 'absent' }}"
+    create: false
+  become: true
+  become_user: root
+

@@ -1,12 +1,14 @@
-- name: "Configure specific sound drivers to load at boot"
+- name: "Configure which sound drivers load at boot"
   ansible.builtin.include_tasks: load_drivers.yml
 
-- name: "Configure sound settings common to all sound cards"
-  ansible.builtin.include_tasks: config_common.yml
+- name: "Configure PCM settings used by all drivers"
+  ansible.builtin.include_tasks: pcm.yml
 
-- name: "Configure sound settings for Intel sound cards"
-  ansible.builtin.include_tasks: config_intel.yml
-  when: oss_sound_card_type == "intel"
+- name: "Configure the snd_hda HD-Audio sound driver"
+  ansible.builtin.include_tasks: hd_audio_driver.yml
+
+- name: "Configure the snd_uaudio USB-Audio sound driver"
+  ansible.builtin.include_tasks: usb_driver.yml
 
 - name: "Create OSS utility script"
   ansible.builtin.include_tasks: utility_script.yml
