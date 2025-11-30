@@ -15,7 +15,7 @@ oss_load_driver_at_boot_ess_maestro3: false
 oss_load_driver_at_boot_ess_solo: false
 oss_load_driver_at_boot_forte_media_fm801: false
 # generic HD audio, common for AMD64:
-oss_load_driver_at_boot_hdaudio: true
+oss_load_driver_at_boot_hdaudio: false
 oss_load_driver_at_boot_intel_ich_ac97: false
 oss_load_driver_at_boot_i2s_spi: false
 oss_load_driver_at_boot_neomagic: false

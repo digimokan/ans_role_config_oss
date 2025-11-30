@@ -8,7 +8,7 @@
   when: (oss_hdaudio_nid_disable_list | length > 0) and
         (not oss_load_driver_at_boot_hdaudio)
 
-- name: "Disable select HD-Audio NID channels from appearing in list of PCMs"
+- name: "Disable/hide select HD-Audio NID channel PCMs in '{{ oss_device_hints_path }}'"
   ansible.builtin.blockinfile:
     path: "{{ oss_device_hints_path }}"
     block: |

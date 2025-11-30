@@ -1,4 +1,4 @@
-- name: "Set which sound drivers to enable/load at boot"
+- name: "Set which sound drivers to enable/load at boot in '{{ oss_loader_conf_path }}'"
   community.general.sysrc:
     path: "{{ oss_loader_conf_path }}"
     name: "snd_{{ driver.nm }}_load"

@@ -18,7 +18,7 @@
   notify:
     - oss_restart_devd
 
-- name: "Remove any devd USB on-attach rules file at '{{ oss_devd_usb_rules_path }}'"
+- name: "Remove any devd USB on-attach rules file from '{{ oss_devd_usb_rules_path }}'"
   ansible.builtin.file:
     path: "{{ oss_devd_usb_rules_path }}"
     state: absent
