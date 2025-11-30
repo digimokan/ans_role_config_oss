@@ -1,8 +1,8 @@
 # If defined, detect attach of this USB device and set it as default I/O device
 # Note: this setting may work better than oss_force_set_sound_io_pcm_at_boot
 #       for flaky USB audio devices.
-oss_set_usb_sound_io_device_on_attach: {}
-# oss_set_usb_sound_io_device_on_attach:
+oss_set_usb_device_as_default_pcm_on_attach: {}
+# oss_set_usb_device_as_default_pcm_on_attach:
 #   # find with "usbconfig dump_info" and "usbconfig -d <ugen> dump_device_desc"
 #   vendor_id: "0xb0da"
 #   prod_id: "0x5c53"
